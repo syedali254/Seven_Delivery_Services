@@ -1,12 +1,3 @@
-Read [](file:///c%3A/sentix/seven_delivery_service/lib/main.dart#1-1), lines 1 to 60
-
-Read [](file:///c%3A/sentix/seven_delivery_service/pubspec.yaml#1-1), lines 1 to 60
-
-Read [](file:///c%3A/sentix/seven_delivery_service/README.md)
-
-Read [](file:///c%3A/sentix/seven_delivery_service/lib/features)
-
-Read [](file:///c%3A/sentix/seven_delivery_service/database_schema.sql)
 
 # Seven Delivery Service
 
