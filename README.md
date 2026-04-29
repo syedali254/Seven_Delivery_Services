@@ -112,4 +112,3 @@ flutter build ios --release
 ## License
 
 This project is proprietary. All rights reserved.
-```
