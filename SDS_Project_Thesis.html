@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Seven Delivery Service — Project Thesis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --primary: #F26522;
+    --dark: #1A1A1A;
+    --grey: #64748B;
+    --light-bg: #F8FAFC;
+    --border: #E2E8F0;
+    --success: #10B981;
+    --error: #EF4444;
+  }
+
+  @page {
+    margin: 0.8in 0.9in;
+    size: A4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--dark);
+    line-height: 1.7;
+    font-size: 11pt;
+    background: white;
+  }
+
+  /* COVER PAGE */
+  .cover {
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 60px 40px;
+  }
+  .cover-icon {
+    width: 80px; height: 80px;
+    background: var(--primary);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 32px;
+    box-shadow: 0 12px 40px rgba(242,101,34,0.3);
+  }
+  .cover-icon svg { width: 44px; height: 44px; fill: white; }
+  .cover h1 {
+    font-size: 36pt;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .cover .subtitle {
+    font-size: 14pt;
+    color: var(--grey);
+    font-weight: 400;
+    margin-bottom: 48px;
+  }
+  .cover .thesis-label {
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 48px;
+    padding: 8px 24px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+  }
+  .cover-meta {
+    text-align: left;
+    border-top: 2px solid var(--border);
+    padding-top: 24px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .cover-meta p {
+    font-size: 10.5pt;
+    color: var(--grey);
+    margin-bottom: 6px;
+  }
+  .cover-meta strong { color: var(--dark); font-weight: 600; }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    page-break-after: always;
+    padding: 40px 0;
+  }
+  .toc h2 {
+    font-size: 22pt;
+    font-weight: 800;
+    margin-bottom: 28px;
+    color: var(--dark);
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 10.5pt;
+  }
+  .toc-item.main { font-weight: 600; color: var(--dark); }
+  .toc-item.sub { padding-left: 24px; font-weight: 400; color: var(--grey); }
+  .toc-num { color: var(--primary); font-weight: 600; min-width: 24px; }
+
+  /* HEADINGS */
+  h2 {
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--dark);
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--primary);
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--dark);
+    margin-top: 28px;
+    margin-bottom: 10px;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  p { margin-bottom: 10px; }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 18px;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+  th {
+    background: var(--dark);
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--light-bg); }
+
+  /* CODE BLOCKS */
+  pre {
+    background: #1E293B;
+    color: #E2E8F0;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    line-height: 1.6;
+    margin: 12px 0 16px;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: #F1F5F9;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 9pt;
+    color: #BE185D;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+
+  /* ARCHITECTURE DIAGRAM */
+  .diagram {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+  .diagram pre {
+    background: transparent;
+    color: var(--dark);
+    padding: 0;
+    margin: 0;
+    font-size: 8pt;
+    line-height: 1.4;
+  }
+
+  /* INFO BOXES */
+  .info-box {
+    background: #FFF7ED;
+    border-left: 4px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 10pt;
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-green { background: #D1FAE5; color: #065F46; }
+  .badge-red { background: #FEE2E2; color: #991B1B; }
+  .badge-orange { background: #FFEDD5; color: #9A3412; }
+  .badge-blue { background: #DBEAFE; color: #1E40AF; }
+
+  /* FLOW */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+    font-size: 10pt;
+    font-weight: 600;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+  .flow-arrow { color: var(--primary); font-weight: 800; }
+
+  /* LISTS */
+  ul, ol { margin: 8px 0 14px 20px; }
+  li { margin-bottom: 4px; }
+
+  /* ROLE TABLE */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr 80px 80px;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 12px 0;
+    font-size: 9.5pt;
+  }
+  .role-grid > div {
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .role-grid > div:nth-child(3n+1) { font-weight: 500; }
+  .role-header { background: var(--dark); color: white; font-weight: 600 !important; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.5px; }
+  .check { color: var(--success); font-weight: 700; text-align: center; }
+  .cross { color: #CBD5E1; text-align: center; }
+
+  /* FILE TREE */
+  .file-tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    line-height: 1.6;
+    background: #1E293B;
+    color: #94A3B8;
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin: 12px 0;
+  }
+  .file-tree .folder { color: #38BDF8; }
+  .file-tree .file { color: #A5F3FC; }
+  .file-tree .comment { color: #64748B; }
+
+  /* SECTION BREAK */
+  .section-break {
+    page-break-before: always;
+  }
+
+  /* FOOTER */
+  .page-footer {
+    text-align: center;
+    color: var(--grey);
+    font-size: 8pt;
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* UC CARD */
+  .uc-card {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+  .uc-card h4 { margin-top: 0; color: var(--dark); }
+  .uc-card ol { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<!-- ============================= COVER PAGE ============================= -->
+<div class="cover">
+  <div class="cover-icon">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 7c0-1.1-.9-2-2-2h-3v2h3v2.65L13.52 14H10V9H6c-2.21 0-4 1.79-4 4v3h2c0 1.66 1.34 3 3 3s3-1.34 3-3h4.48L19 10.35V7zM7 17c-.55 0-1-.45-1-1h2c0 .55-.45 1-1 1z"/><path d="M5 6h5v2H5zm14 7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm0 4c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+  </div>
+  <h1>Seven Delivery Service</h1>
+  <p class="subtitle">A Flutter-Based Real-Time Courier Management System</p>
+  <div class="thesis-label">Project Thesis</div>
+  <div class="cover-meta">
+    <p><strong>Author:</strong> syedali254</p>
+    <p><strong>Organization:</strong> syedali254's Org</p>
+    <p><strong>Platform:</strong> Cross-Platform (Android, iOS, Web, Desktop)</p>
+    <p><strong>Technology:</strong> Flutter 3.11 · Dart · Supabase · Material Design 3</p>
+    <p><strong>Date:</strong> April 2026</p>
+  </div>
+</div>
+
+<!-- ============================= TABLE OF CONTENTS ============================= -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <div class="toc-item main"><span><span class="toc-num">1</span> &nbsp; Introduction</span></div>
+  <div class="toc-item main"><span><span class="toc-num">2</span> &nbsp; Problem Statement</span></div>
+  <div class="toc-item main"><span><span class="toc-num">3</span> &nbsp; System Architecture</span></div>
+  <div class="toc-item main"><span><span class="toc-num">4</span> &nbsp; Technology Stack</span></div>
+  <div class="toc-item sub">4.1 Flutter &amp; Dart</div>
+  <div class="toc-item sub">4.2 Supabase</div>
+  <div class="toc-item sub">4.3 Third-Party Packages</div>
+  <div class="toc-item main"><span><span class="toc-num">5</span> &nbsp; Database Schema</span></div>
+  <div class="toc-item sub">5.1 Admins Table</div>
+  <div class="toc-item sub">5.2 Riders Table</div>
+  <div class="toc-item sub">5.3 Orders Table</div>
+  <div class="toc-item sub">5.4 Logs Table</div>
+  <div class="toc-item main"><span><span class="toc-num">6</span> &nbsp; Supabase Integration</span></div>
+  <div class="toc-item sub">6.1 Connection Setup</div>
+  <div class="toc-item sub">6.2 Real-Time Streaming</div>
+  <div class="toc-item sub">6.3 API Keys &amp; Security</div>
+  <div class="toc-item main"><span><span class="toc-num">7</span> &nbsp; Authentication System</span></div>
+  <div class="toc-item main"><span><span class="toc-num">8</span> &nbsp; User Roles &amp; Access Control</span></div>
+  <div class="toc-item main"><span><span class="toc-num">9</span> &nbsp; Application Modules</span></div>
+  <div class="toc-item sub">9.1 Login Screen</div>
+  <div class="toc-item sub">9.2 Navigation System</div>
+  <div class="toc-item sub">9.3 Admin Dashboard</div>
+  <div class="toc-item sub">9.4 Rider Dashboard</div>
+  <div class="toc-item sub">9.5 Orders Management</div>
+  <div class="toc-item sub">9.6 Rider Registration (Onboarding)</div>
+  <div class="toc-item sub">9.7 Fleet Management</div>
+  <div class="toc-item sub">9.8 QR Scanner Verification</div>
+  <div class="toc-item sub">9.9 Profile &amp; Settings</div>
+  <div class="toc-item main"><span><span class="toc-num">10</span> &nbsp; Core Services Layer</span></div>
+  <div class="toc-item main"><span><span class="toc-num">11</span> &nbsp; Data Models</span></div>
+  <div class="toc-item main"><span><span class="toc-num">12</span> &nbsp; UI/UX Design System</span></div>
+  <div class="toc-item main"><span><span class="toc-num">13</span> &nbsp; Use Case Scenarios</span></div>
+  <div class="toc-item sub">13.1 Admin Use Cases</div>
+  <div class="toc-item sub">13.2 Rider Use Cases</div>
+  <div class="toc-item main"><span><span class="toc-num">14</span> &nbsp; Project File Structure</span></div>
+  <div class="toc-item main"><span><span class="toc-num">15</span> &nbsp; Deployment</span></div>
+  <div class="toc-item main"><span><span class="toc-num">16</span> &nbsp; Conclusion</span></div>
+</div>
+
+<!-- ============================= SECTION 1 ============================= -->
+<div class="section-break"></div>
+<h2>1. Introduction</h2>
+<p>Seven Delivery Service (SDS) is a real-time courier and parcel delivery management system built using Flutter. It provides a single application that serves two types of users — <strong>Administrators</strong> and <strong>Delivery Riders</strong> — with role-based dashboards and functionality.</p>
+<p>The application connects to a cloud-hosted PostgreSQL database via Supabase and provides real-time updates using streaming WebSocket subscriptions. Changes made by any user are reflected instantly across all connected devices without manual refreshing.</p>
+<p>The system handles the full lifecycle of a delivery:</p>
+<div class="flow">
+  <span class="flow-step">Order Created</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">Rider Assigned</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">QR Verified</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">Delivered</span>
+</div>
+
+<!-- ============================= SECTION 2 ============================= -->
+<h2>2. Problem Statement</h2>
+<p>Delivery companies in the UAE need a lightweight, unified system to:</p>
+<ul>
+  <li>Track orders in real-time across their full lifecycle</li>
+  <li>Manage a fleet of delivery riders with status tracking</li>
+  <li>Assign orders to riders — automatically (load-balanced) or manually</li>
+  <li>Verify parcel handover via QR code scanning</li>
+  <li>Generate analytics and performance reports</li>
+  <li>Allow riders to view their own deliveries and toggle availability</li>
+  <li>Work across multiple platforms (mobile, web, desktop) from a single codebase</li>
+</ul>
+<p>SDS solves all of these requirements in a single cross-platform application.</p>
+
+<!-- ============================= SECTION 3 ============================= -->
+<div class="section-break"></div>
+<h2>3. System Architecture</h2>
+<p>The application follows a <strong>Service-Model-View</strong> architecture pattern:</p>
+<ul>
+  <li><strong>Views</strong> (Screens) — Flutter widgets the user interacts with</li>
+  <li><strong>Services</strong> — Dart classes that handle business logic and communicate with Supabase</li>
+  <li><strong>Models</strong> — Dart classes that represent database table rows as typed objects</li>
+</ul>
+
+<div class="diagram">
+<pre>
+┌──────────────────────────────────────────────────────────────┐
+│                        Flutter App                            │
+│        (Android · iOS · Web · Windows · macOS · Linux)        │
+├──────────────────────────────────────────────────────────────┤
+│                     PRESENTATION LAYER                        │
+│   LoginScreen · AdminDashboard · RiderDashboard · Orders     │
+│   RiderRegistration · FleetManagement · QRScanner · Profile  │
+├──────────────────────────────────────────────────────────────┤
+│                       SERVICE LAYER                           │
+│   AuthService · OrderService · RiderService · LogService     │
+│                     ReportService                             │
+├──────────────────────────────────────────────────────────────┤
+│                        MODEL LAYER                            │
+│          OrderModel · RiderModel · LogModel                   │
+├──────────────────────────────────────────────────────────────┤
+│                      SUPABASE SDK                             │
+│          supabase_flutter (REST + Realtime WebSocket)         │
+└─────────────────────────┬────────────────────────────────────┘
+                          │ HTTPS / WSS (Encrypted)
+┌─────────────────────────▼────────────────────────────────────┐
+│                      SUPABASE CLOUD                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌──────────────────────┐ │
+│  │ PostgreSQL   │  │ GoTrue Auth │  │ Realtime Engine      │ │
+│  │ Database     │  │ (JWT-based) │  │ (WebSocket push)     │ │
+│  └─────────────┘  └─────────────┘  └──────────────────────┘ │
+└──────────────────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<div class="info-box">
+  <strong>How it works:</strong> The Flutter app sends HTTPS requests to Supabase's auto-generated REST API for CRUD operations. For real-time updates, it maintains a persistent WebSocket connection — when any row changes in the database, Supabase pushes the update to all connected clients instantly.
+</div>
+
+<!-- ============================= SECTION 4 ============================= -->
+<div class="section-break"></div>
+<h2>4. Technology Stack</h2>
+
+<h3>4.1 Flutter &amp; Dart</h3>
+<p><strong>Flutter</strong> (SDK ^3.11.5) is Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase. Everything in Flutter is a <strong>widget</strong> — buttons, text, layouts, even the entire app itself.</p>
+<p><strong>Dart</strong> is the programming language Flutter uses. It resembles Java and JavaScript. Key Dart features used in this project:</p>
+<table>
+  <tr><th>Feature</th><th>Purpose in SDS</th></tr>
+  <tr><td><code>async / await</code></td><td>Non-blocking database calls — the UI stays responsive while data loads</td></tr>
+  <tr><td><code>Stream</code></td><td>Real-time data subscriptions — live updates without manual refresh</td></tr>
+  <tr><td><code>enum</code></td><td>Type-safe order statuses (processing, assigned, inTransit, delivered, cancelled)</td></tr>
+  <tr><td><code>factory constructors</code></td><td>Converting JSON from the database into Dart objects (<code>fromJson()</code>)</td></tr>
+  <tr><td><code>StatefulWidget</code></td><td>Widgets that can change over time (loading states, form inputs, toggles)</td></tr>
+</table>
+
+<h3>4.2 Supabase</h3>
+<p>Supabase (v2.12.4) is an open-source Firebase alternative providing:</p>
+<table>
+  <tr><th>Component</th><th>What It Does</th></tr>
+  <tr><td><strong>PostgreSQL Database</strong></td><td>Stores all application data (orders, riders, admins, logs) in relational tables</td></tr>
+  <tr><td><strong>Authentication (GoTrue)</strong></td><td>Handles user signup/login with email + password, issues JWT tokens</td></tr>
+  <tr><td><strong>Realtime Engine</strong></td><td>Pushes database changes to the app instantly via WebSocket connections</td></tr>
+  <tr><td><strong>Auto-generated REST API</strong></td><td>Every table automatically gets CRUD endpoints (Create, Read, Update, Delete)</td></tr>
+  <tr><td><strong>Row Level Security (RLS)</strong></td><td>Database-level access control — ensures users can only access authorized data</td></tr>
+</table>
+
+<h3>4.3 Third-Party Packages</h3>
+<table>
+  <tr><th>Package</th><th>Version</th><th>Purpose</th></tr>
+  <tr><td><code>supabase_flutter</code></td><td>^2.12.4</td><td>Supabase SDK — database, auth, realtime</td></tr>
+  <tr><td><code>google_fonts</code></td><td>^8.0.2</td><td>Poppins font family used throughout the app</td></tr>
+  <tr><td><code>mobile_scanner</code></td><td>^7.2.0</td><td>Camera-based QR code scanning for parcel verification</td></tr>
+  <tr><td><code>vibration</code></td><td>^3.1.8</td><td>Haptic feedback on scan events</td></tr>
+  <tr><td><code>http</code></td><td>^1.2.1</td><td>HTTP calls to Supabase Admin API for rider account creation</td></tr>
+  <tr><td><code>flutter_svg</code></td><td>^2.2.4</td><td>SVG image rendering support</td></tr>
+</table>
+
+<!-- ============================= SECTION 5 ============================= -->
+<div class="section-break"></div>
+<h2>5. Database Schema</h2>
+<p>The system uses <strong>4 PostgreSQL tables</strong> hosted on Supabase, with <code>auth.users</code> as the Supabase-managed authentication table.</p>
+
+<h3>5.1 Admins Table</h3>
+<p>Links admin accounts to Supabase Auth via a foreign key on <code>auth.users.id</code>.</p>
+<table>
+  <tr><th>Column</th><th>Type</th><th>Description</th></tr>
+  <tr><td><code>id</code></td><td>UUID (PK, FK → auth.users)</td><td>Links to the Supabase Auth login account</td></tr>
+  <tr><td><code>full_name</code></td><td>TEXT</td><td>Admin's display name</td></tr>
+  <tr><td><code>created_at</code></td><td>TIMESTAMPTZ</td><td>Account creation timestamp</td></tr>
+  <tr><td><code>Email</code></td><td>TEXT</td><td>Admin's email address</td></tr>
+  <tr><td><code>role</code></td><td>TEXT</td><td>Always "admin"</td></tr>
+</table>
+
+<h3>5.2 Riders Table</h3>
+<p>Stores delivery rider profiles with UAE-specific documentation fields.</p>
+<table>
+  <tr><th>Column</th><th>Type</th><th>Description</th></tr>
+  <tr><td><code>id</code></td><td>UUID (PK)</td><td>Unique rider identifier (generated at registration)</td></tr>
+  <tr><td><code>name</code></td><td>TEXT</td><td>Rider's full name</td></tr>
+  <tr><td><code>phone</code></td><td>TEXT</td><td>Phone number</td></tr>
+  <tr><td><code>passport_number</code></td><td>TEXT</td><td>Passport ID for official documentation</td></tr>
+  <tr><td><code>emirates_id</code></td><td>TEXT</td><td>UAE Emirates ID number</td></tr>
+  <tr><td><code>status</code></td><td>TEXT</td><td>"available", "unavailable", "busy", "offline"</td></tr>
+  <tr><td><code>created_at</code></td><td>TIMESTAMPTZ</td><td>Registration timestamp</td></tr>
+  <tr><td><code>address</code></td><td>TEXT</td><td>Residential address</td></tr>
+  <tr><td><code>email</code></td><td>TEXT</td><td>Login email (for Supabase Auth)</td></tr>
+  <tr><td><code>password</code></td><td>TEXT</td><td>Login password (used during registration only)</td></tr>
+</table>
+
+<h3>5.3 Orders Table</h3>
+<p>The core business table — each row represents a parcel shipment.</p>
+<table>
+  <tr><th>Column</th><th>Type</th><th>Description</th></tr>
+  <tr><td><code>id</code></td><td>TEXT (PK)</td><td>Order/AWB number (e.g., "SDS-123456")</td></tr>
+  <tr><td><code>sender_name</code></td><td>TEXT</td><td>Person sending the parcel</td></tr>
+  <tr><td><code>sender_phone</code></td><td>TEXT</td><td>Sender's contact number</td></tr>
+  <tr><td><code>pickup_address</code></td><td>TEXT</td><td>Where to collect the parcel from</td></tr>
+  <tr><td><code>receiver_name</code></td><td>TEXT</td><td>Person receiving the parcel</td></tr>
+  <tr><td><code>receiver_phone</code></td><td>TEXT</td><td>Receiver's contact number</td></tr>
+  <tr><td><code>address</code></td><td>TEXT</td><td>Delivery address</td></tr>
+  <tr><td><code>city</code></td><td>TEXT</td><td>Delivery city (Dubai, Abu Dhabi, Sharjah, etc.)</td></tr>
+  <tr><td><code>content</code></td><td>TEXT</td><td>Description of parcel contents</td></tr>
+  <tr><td><code>weight</code></td><td>NUMERIC</td><td>Parcel weight in kilograms</td></tr>
+  <tr><td><code>pieces</code></td><td>INT</td><td>Number of items in the shipment</td></tr>
+  <tr><td><code>cod_amount</code></td><td>NUMERIC</td><td>Cash on Delivery amount (AED)</td></tr>
+  <tr><td><code>service_fee</code></td><td>NUMERIC</td><td>Delivery service fee (AED)</td></tr>
+  <tr><td><code>status</code></td><td>TEXT</td><td>Order lifecycle state (see diagram below)</td></tr>
+  <tr><td><code>rider_id</code></td><td>UUID (FK → riders)</td><td>Assigned rider's ID</td></tr>
+  <tr><td><code>verified</code></td><td>BOOLEAN</td><td>Whether the parcel was QR-verified</td></tr>
+  <tr><td><code>created_at</code></td><td>TIMESTAMPTZ</td><td>Order creation timestamp</td></tr>
+</table>
+
+<h4>Order Status Lifecycle</h4>
+<div class="flow">
+  <span class="flow-step"><span class="badge badge-blue">processing</span></span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step"><span class="badge badge-orange">assigned</span></span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step"><span class="badge badge-orange">inTransit</span></span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step"><span class="badge badge-green">delivered</span></span>
+</div>
+<div class="flow" style="margin-top:-4px; padding-left: 280px;">
+  <span class="flow-arrow">↘</span>
+  <span class="flow-step"><span class="badge badge-red">cancelled</span></span>
+</div>
+
+<h3>5.4 Logs Table</h3>
+<p>Tracks all system activities for audit and monitoring purposes.</p>
+<table>
+  <tr><th>Column</th><th>Type</th><th>Description</th></tr>
+  <tr><td><code>id</code></td><td>BIGINT (PK, auto-increment)</td><td>Auto-incrementing identifier</td></tr>
+  <tr><td><code>action</code></td><td>TEXT</td><td>Human-readable action description</td></tr>
+  <tr><td><code>timestamp</code></td><td>TIMESTAMPTZ</td><td>When the action occurred</td></tr>
+</table>
+
+<!-- ============================= SECTION 6 ============================= -->
+<div class="section-break"></div>
+<h2>6. Supabase Integration</h2>
+
+<h3>6.1 Connection Setup</h3>
+<p>The Supabase connection is established at app startup in <code>main.dart</code> before any widget renders:</p>
+<pre><code>void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://lpenvkxvtpdbrzrmhrhg.supabase.co',
+    anonKey: 'sb_publishable_y0cDWZ6idLhcl78_...',
+  );
+
+  runApp(const SevenDeliveryApp());
+}</code></pre>
+<p>The centralized connection is managed by <code>SupabaseService</code>, which every service class accesses:</p>
+<pre><code>class SupabaseService {
+  static const String supabaseUrl = 'https://lpenvkxvtpdbrzrmhrhg.supabase.co';
+  static const String supabaseAnonKey = 'sb_publishable_...';
+
+  static SupabaseClient get client => Supabase.instance.client;
+}</code></pre>
+
+<h3>6.2 Real-Time Streaming</h3>
+<p>Instead of polling or manual refreshing, SDS uses Supabase's <strong>Realtime</strong> feature. When any row in a table changes (insert, update, or delete), the app receives the update instantly via a WebSocket connection:</p>
+<pre><code>// This returns a Stream that emits new data whenever the orders table changes
+_client.from('orders')
+    .stream(primaryKey: ['id'])
+    .order('id', ascending: false)
+    .map((data) => data.map((json) => OrderModel.fromJson(json)).toList());</code></pre>
+<p>Real-time streaming is used for:</p>
+<ul>
+  <li><strong>Orders list</strong> — new orders appear instantly on all screens</li>
+  <li><strong>Riders list</strong> — status changes (available ↔ unavailable) reflect immediately</li>
+  <li><strong>Activity logs</strong> — new log entries stream to the admin dashboard live</li>
+</ul>
+
+<h3>6.3 API Keys &amp; Security</h3>
+<table>
+  <tr><th>Key</th><th>Type</th><th>Purpose</th><th>Where Used</th></tr>
+  <tr><td><strong>Anon Key</strong></td><td>Public (safe for clients)</td><td>Normal read/write with RLS enforcement</td><td>All screens, all services</td></tr>
+  <tr><td><strong>Service Role Key</strong></td><td>Secret (server-only)</td><td>Admin-level operations bypassing RLS</td><td>Rider auth account creation (mobile only)</td></tr>
+</table>
+<div class="info-box">
+  <strong>Security Note:</strong> The service role key is stored in <code>secrets.dart</code> and is only used on mobile/desktop platforms. Web browsers block service role keys for security — the app detects the platform and uses the appropriate strategy.
+</div>
+
+<!-- ============================= SECTION 7 ============================= -->
+<div class="section-break"></div>
+<h2>7. Authentication System</h2>
+
+<h3>7.1 Login Flow</h3>
+<p>The app uses Supabase Auth (GoTrue) — a full authentication system with email + password login.</p>
+<pre><code>Future&lt;AuthResponse&gt; signIn(String email, String password) async {
+  return await _client.auth.signInWithPassword(
+    email: email,
+    password: password,
+  );
+}</code></pre>
+<p>This sends the credentials to Supabase, which validates them and returns a <strong>JWT token</strong> (JSON Web Token). The token is stored in memory and sent with every subsequent database request to prove the user's identity.</p>
+
+<h3>7.2 Session Management</h3>
+<p>An <code>AuthGuard</code> widget in <code>main.dart</code> listens to auth state changes using a <code>StreamBuilder</code>:</p>
+<pre><code>StreamBuilder&lt;AuthState&gt;(
+  stream: Supabase.instance.client.auth.onAuthStateChange,
+  builder: (context, snapshot) {
+    final session = Supabase.instance.client.auth.currentSession;
+
+    if (session == null) return const LoginScreen();      // → Login
+    return const MainNavigationScreen();                   // → App
+  },
+);</code></pre>
+<p>If the user logs out or the session expires, the app automatically returns to the login screen.</p>
+
+<h3>7.3 Rider Account Creation (Dual Strategy)</h3>
+<p>When an admin registers a new rider, the system creates both:</p>
+<ol>
+  <li>A <strong>database row</strong> in the <code>riders</code> table (profile data)</li>
+  <li>A <strong>Supabase Auth account</strong> so the rider can log in with email + password</li>
+</ol>
+<p>This uses a platform-aware approach:</p>
+<table>
+  <tr><th>Platform</th><th>Method</th><th>Reason</th></tr>
+  <tr><td>Mobile / Desktop</td><td>Admin REST API with service role key</td><td>Creates pre-confirmed accounts (rider can log in immediately)</td></tr>
+  <tr><td>Web (Chrome)</td><td><code>signUp()</code> via regular Supabase client</td><td>Browsers block service role keys for security</td></tr>
+</table>
+<p>A PostgreSQL trigger (<code>auto_confirm_trigger</code>) auto-confirms all new accounts so riders can log in without email verification.</p>
+
+<!-- ============================= SECTION 8 ============================= -->
+<div class="section-break"></div>
+<h2>8. User Roles &amp; Access Control</h2>
+
+<h3>8.1 Role Detection</h3>
+<p>After login, the app determines the user's role through a multi-step check in <code>AuthService.getUserRole()</code>:</p>
+<ol>
+  <li><strong>Hardcoded admin check</strong> — the root admin email is always recognized as admin</li>
+  <li><strong>Admins table lookup</strong> — queries the <code>admins</code> table by email</li>
+  <li><strong>Riders table lookup</strong> — queries the <code>riders</code> table by email</li>
+  <li><strong>Fallback</strong> — defaults to <code>UserRole.rider</code></li>
+</ol>
+
+<h3>8.2 Role-Based Navigation</h3>
+<p>The navigation system filters available screens based on the detected role:</p>
+<div class="role-grid">
+  <div class="role-header">Screen</div>
+  <div class="role-header" style="text-align:center">Admin</div>
+  <div class="role-header" style="text-align:center">Rider</div>
+  <div>Dashboard (Home)</div><div class="check">✓ Admin</div><div class="check">✓ Rider</div>
+  <div>Orders</div><div class="check">✓ All + Create</div><div class="check">✓ Own Only</div>
+  <div>Fleet Management</div><div class="check">✓</div><div class="cross">✗</div>
+  <div>QR Scanner (Verify)</div><div class="check">✓</div><div class="check">✓</div>
+  <div>Rider Registration (Onboard)</div><div class="check">✓</div><div class="cross">✗</div>
+  <div>Profile / Settings</div><div class="check">✓</div><div class="cross">✗</div>
+</div>
+
+<!-- ============================= SECTION 9 ============================= -->
+<div class="section-break"></div>
+<h2>9. Application Modules</h2>
+
+<h3>9.1 Login Screen</h3>
+<p><strong>File:</strong> <code>lib/features/auth/login_screen.dart</code></p>
+<p>The entry point of the application. Provides a clean, centered login form.</p>
+<table>
+  <tr><th>Feature</th><th>Detail</th></tr>
+  <tr><td>Branding</td><td>"Seven Delivery" title with delivery icon in orange circle</td></tr>
+  <tr><td>Email Field</td><td>Email keyboard type, auto-focus, "Email Address" label</td></tr>
+  <tr><td>Password Field</td><td>Visibility toggle (eye icon), submit on Enter key</td></tr>
+  <tr><td>Validation</td><td>Empty field check before submission</td></tr>
+  <tr><td>Error Handling</td><td>Red snackbar: "Invalid email or password. Please try again."</td></tr>
+  <tr><td>Loading State</td><td>Spinner replaces button text during authentication</td></tr>
+  <tr><td>Responsive</td><td>ConstrainedBox (max 420px width), horizontal padding</td></tr>
+</table>
+
+<h3>9.2 Navigation System</h3>
+<p><strong>File:</strong> <code>lib/features/navigation/main_navigation_screen.dart</code></p>
+<p>The app shell that provides navigation and adapts to screen size:</p>
+<table>
+  <tr><th>Screen Width</th><th>Navigation Type</th></tr>
+  <tr><td>&lt; 700px (Mobile)</td><td>Bottom navigation bar with icons + labels</td></tr>
+  <tr><td>700–900px (Tablet)</td><td>Collapsed navigation rail (icons only) on the left side</td></tr>
+  <tr><td>&gt; 900px (Desktop)</td><td>Extended navigation rail with icons + text labels</td></tr>
+</table>
+<p>The top app bar displays "SDS Admin" or "SDS Rider" based on role, with the Seven Delivery branding icon.</p>
+
+<h3>9.3 Admin Dashboard</h3>
+<p><strong>File:</strong> <code>lib/features/dashboard/dashboard_screen.dart</code></p>
+<p>The admin's home screen showing a comprehensive real-time operations overview:</p>
+
+<h4>System Health Monitor</h4>
+<p>A status bar at the top showing overall system status with color coding:</p>
+<ul>
+  <li><span class="badge badge-green">HEALTHY</span> — Riders are online, no issues</li>
+  <li><span class="badge badge-orange">WARNING</span> — Failed deliveries exceed 10% threshold</li>
+  <li><span class="badge badge-red">ISSUE</span> — Zero active riders online</li>
+</ul>
+<p>Displays: Active Riders count, Orders In Transit, Failed Deliveries.</p>
+
+<h4>Financial Summary</h4>
+<p>Two cards showing: <strong>Total Fleet Revenue</strong> (sum of all service fees) and <strong>Pending COD</strong> (cash on delivery not yet collected).</p>
+
+<h4>KPI Grid</h4>
+<p>Three metric cards: Total Orders, Orders in Flow (processing), Successful Deliveries — with icons and color coding.</p>
+
+<h4>Performance Section</h4>
+<p>Circular progress indicators visualizing: In-transit percentage, Success rate, Cancellation rate.</p>
+
+<h4>Activity Feed</h4>
+<p>Live stream of the last 5 system log entries (e.g., "Admin Registered New Rider Account", "Order SDS-123 moved to DELIVERED").</p>
+
+<h4>Analytics Report Modal</h4>
+<p>Tapping "Generate Report" opens a bottom sheet with total/delivered/cancelled counts and per-rider performance (number of deliveries each rider has completed).</p>
+
+<h3>9.4 Rider Dashboard</h3>
+<p><strong>File:</strong> <code>lib/features/dashboard/rider_dashboard_screen.dart</code></p>
+<p>A simplified, rider-focused home screen:</p>
+<table>
+  <tr><th>Section</th><th>Description</th></tr>
+  <tr><td><strong>Welcome Header</strong></td><td>Shows rider's name (not email), On/Off Duty toggle, sign-out button</td></tr>
+  <tr><td><strong>Personal Stats</strong></td><td>Two cards: total deliveries completed, total COD collected (AED)</td></tr>
+  <tr><td><strong>Active Deliveries</strong></td><td>List of orders assigned to this rider that haven't been delivered yet</td></tr>
+  <tr><td><strong>Error Handling</strong></td><td>Orange cards for "profile not found" or "connection issue" with retry</td></tr>
+</table>
+<p><strong>How it identifies "my" orders:</strong> The system matches the logged-in user's email to the <code>riders</code> table to find the rider ID, then filters orders where <code>rider_id</code> matches.</p>
+
+<div class="section-break"></div>
+<h3>9.5 Orders Management</h3>
+<p><strong>File:</strong> <code>lib/features/orders/orders_screen.dart</code></p>
+<p>The main order management screen with full CRUD and assignment capabilities.</p>
+
+<h4>Admin View</h4>
+<ul>
+  <li>Displays ALL orders with checkbox selection for batch operations</li>
+  <li><strong>Create Order</strong> — Dialog with sender/receiver info, UAE city dropdown (Dubai, Abu Dhabi, Sharjah, Ajman, Fujairah, RAK, UAQ), COD amount, weight</li>
+  <li>Auto-generated order IDs: <code>SDS-{timestamp}</code> with default service fee of 25 AED</li>
+</ul>
+
+<h4>Assignment System</h4>
+<table>
+  <tr><th>Method</th><th>How It Works</th></tr>
+  <tr><td><strong>Auto-Assign</strong></td><td>Finds all "available" riders, distributes selected orders evenly via round-robin algorithm</td></tr>
+  <tr><td><strong>Manual Assign</strong></td><td>Admin picks a specific rider from a dialog showing name, phone, and availability status</td></tr>
+</table>
+
+<h4>Rider View</h4>
+<p>Shows only orders assigned to this rider. No create/assign buttons. Checkboxes disabled.</p>
+
+<h3>9.6 Rider Registration (Onboarding)</h3>
+<p><strong>File:</strong> <code>lib/features/rider_registration/rider_registration_screen.dart</code></p>
+<p>Admin-only screen to register new riders with two form sections:</p>
+<table>
+  <tr><th>Section</th><th>Fields</th></tr>
+  <tr><td><strong>Login Credentials</strong></td><td>Email address, Password (minimum 6 characters)</td></tr>
+  <tr><td><strong>Official Documentation</strong></td><td>Full name, Phone number, Passport number, Emirates ID, Residential address</td></tr>
+</table>
+<p><strong>On submit:</strong> Generates UUID → inserts <code>riders</code> row → creates Supabase Auth account → logs action → shows success/warning snackbar.</p>
+
+<h3>9.7 Fleet Management</h3>
+<p><strong>File:</strong> <code>lib/features/rider_management/rider_management_screen.dart</code></p>
+<p>Admin-only screen showing all registered riders with search and management capabilities.</p>
+<table>
+  <tr><th>View</th><th>Layout</th></tr>
+  <tr><td>Mobile</td><td>Card-based list with avatar, name, phone, status chip, passport/emirates info, edit/delete buttons</td></tr>
+  <tr><td>Desktop</td><td>DataTable with columns: Name, Phone, Passport, Emirates ID, Status, Actions</td></tr>
+</table>
+<p>Features: real-time streaming, search/filter by name or phone, delete with confirmation dialog, empty state with icon.</p>
+
+<h3>9.8 QR Scanner Verification</h3>
+<p><strong>File:</strong> <code>lib/features/qr_scanner/qr_scanner_screen.dart</code></p>
+<p>Used to verify physical parcel handover by scanning QR codes on shipments.</p>
+<h4>Scan Flow</h4>
+<ol>
+  <li>Opens device camera using the <code>mobile_scanner</code> package</li>
+  <li>Displays a targeting overlay (orange-bordered square)</li>
+  <li>When a QR code is detected, extracts the order ID</li>
+  <li><strong>Smart parsing:</strong> handles both plain text IDs and JSON QR codes (<code>{"order_id": "SDS-123"}</code>)</li>
+  <li><strong>"Ghost-buster":</strong> removes invisible/special characters from the scanned text</li>
+  <li>Updates order status to <code>inTransit</code> and sets <code>verified = true</code></li>
+  <li>Shows green success dialog or red error dialog</li>
+</ol>
+<p><strong>Manual fallback:</strong> "Enter ID Manually" button for cases where QR scanning fails.</p>
+<p>A 3-second cooldown prevents duplicate scans.</p>
+
+<h3>9.9 Profile &amp; Settings</h3>
+<p><strong>File:</strong> <code>lib/features/profile/profile_screen.dart</code></p>
+<p>Admin-only settings screen showing: user avatar, email address, "Administrator" role badge, account info card (email, role, app version v3.0), full-width sign-out button with confirmation dialog.</p>
+
+<!-- ============================= SECTION 10 ============================= -->
+<div class="section-break"></div>
+<h2>10. Core Services Layer</h2>
+<p>All business logic lives in service classes under <code>lib/core/services/</code>. Each service encapsulates a specific domain:</p>
+
+<table>
+  <tr><th>Service</th><th>File</th><th>Responsibilities</th></tr>
+  <tr><td><strong>SupabaseService</strong></td><td><code>supabase_service.dart</code></td><td>Central connection manager. Stores URL + anon key. Provides static <code>client</code> getter.</td></tr>
+  <tr><td><strong>AuthService</strong></td><td><code>auth_service.dart</code></td><td>Sign in, sign out, get current user, determine role, find rider ID by email.</td></tr>
+  <tr><td><strong>OrderService</strong></td><td><code>order_service.dart</code></td><td>Stream orders, create order, update status, assign to rider, auto-assign (least-busy), batch assign.</td></tr>
+  <tr><td><strong>RiderService</strong></td><td><code>rider_service.dart</code></td><td>Stream riders, create rider (DB + Auth), get all riders, update status, delete rider.</td></tr>
+  <tr><td><strong>LogService</strong></td><td><code>log_service.dart</code></td><td>Add log entry, get recent logs (batch), stream logs in real-time.</td></tr>
+  <tr><td><strong>ReportService</strong></td><td><code>report_service.dart</code></td><td>Generate analytics data (totals, per-rider performance), calculate system health metrics.</td></tr>
+</table>
+
+<!-- ============================= SECTION 11 ============================= -->
+<h2>11. Data Models</h2>
+<p>Data models are Dart classes that map to database table rows. Each has a <code>fromJson()</code> factory constructor (database → Dart) and a <code>toJson()</code> method (Dart → database).</p>
+
+<table>
+  <tr><th>Model</th><th>File</th><th>Fields</th><th>Special Features</th></tr>
+  <tr><td><strong>OrderModel</strong></td><td><code>order_model.dart</code></td><td>16 fields (id, sender/receiver info, address, city, content, weight, pieces, COD, fee, status, rider_id, verified)</td><td>Uses <code>OrderStatus</code> enum for type-safe status handling</td></tr>
+  <tr><td><strong>RiderModel</strong></td><td><code>rider_model.dart</code></td><td>10 fields (id, name, phone, passport, emirates_id, status, address, email, password)</td><td>Optional email/password for auth registration</td></tr>
+  <tr><td><strong>LogModel</strong></td><td><code>log_model.dart</code></td><td>3 fields (id, action, timestamp)</td><td>DateTime parsing from ISO 8601 strings</td></tr>
+</table>
+
+<!-- ============================= SECTION 12 ============================= -->
+<div class="section-break"></div>
+<h2>12. UI/UX Design System</h2>
+
+<h3>12.1 Color Palette</h3>
+<table>
+  <tr><th>Name</th><th>Hex</th><th>Usage</th><th style="width:40px">Sample</th></tr>
+  <tr><td>Primary (Orange)</td><td><code>#F26522</code></td><td>Buttons, accents, active states, branding</td><td style="background:#F26522; border-radius:4px;"></td></tr>
+  <tr><td>Dark</td><td><code>#1A1A1A</code></td><td>App bar, bottom nav, text headings</td><td style="background:#1A1A1A; border-radius:4px;"></td></tr>
+  <tr><td>Background</td><td><code>#F7F8FA</code></td><td>Page backgrounds</td><td style="background:#F7F8FA; border:1px solid #ddd; border-radius:4px;"></td></tr>
+  <tr><td>Grey</td><td><code>#94A3B8</code></td><td>Subtitles, labels, secondary text</td><td style="background:#94A3B8; border-radius:4px;"></td></tr>
+  <tr><td>Success (Green)</td><td><code>#10B981</code></td><td>Delivered status, success messages</td><td style="background:#10B981; border-radius:4px;"></td></tr>
+  <tr><td>Error (Red)</td><td><code>#EF4444</code></td><td>Errors, delete actions, cancelled status</td><td style="background:#EF4444; border-radius:4px;"></td></tr>
+</table>
+
+<h3>12.2 Typography</h3>
+<p>The app uses the <strong>Poppins</strong> font family (via Google Fonts) with the following scale:</p>
+<table>
+  <tr><th>Style</th><th>Size</th><th>Weight</th><th>Usage</th></tr>
+  <tr><td>Display Large</td><td>32pt</td><td>800 (Extra Bold)</td><td>Page titles on desktop</td></tr>
+  <tr><td>Title Large</td><td>20pt</td><td>700 (Bold)</td><td>Section headings</td></tr>
+  <tr><td>Body Medium</td><td>15pt</td><td>400 (Regular)</td><td>Body text, descriptions</td></tr>
+  <tr><td>Labels</td><td>11pt</td><td>600 (Semi-Bold)</td><td>KPI labels, status text</td></tr>
+</table>
+
+<h3>12.3 Spacing System</h3>
+<p>An 8px grid system with predefined constants: <code>s4</code> (4px), <code>s8</code> (8px), <code>s12</code> (12px), <code>s16</code> (16px), <code>s24</code> (24px), <code>s32</code> (32px), <code>s48</code> (48px).</p>
+
+<h3>12.4 GlassCard Component</h3>
+<p>A reusable card widget used across all screens. White background, subtle grey border, two-layer box shadow (soft outer + crisp inner), 20px border radius. Defined in <code>lib/core/widgets/glass_card.dart</code>.</p>
+
+<h3>12.5 Responsive Breakpoints</h3>
+<table>
+  <tr><th>Width</th><th>Classification</th><th>Layout Behavior</th></tr>
+  <tr><td>&lt; 700px</td><td>Mobile</td><td>Single column, bottom nav, compact spacing</td></tr>
+  <tr><td>700–900px</td><td>Tablet</td><td>Side nav rail (collapsed), multi-column where appropriate</td></tr>
+  <tr><td>&gt; 900px</td><td>Desktop</td><td>Extended side nav, multi-column, DataTables</td></tr>
+</table>
+
+<!-- ============================= SECTION 13 ============================= -->
+<div class="section-break"></div>
+<h2>13. Use Case Scenarios</h2>
+
+<h3>13.1 Admin Use Cases</h3>
+
+<div class="uc-card">
+  <h4>UC-1: Admin Logs In</h4>
+  <ol>
+    <li>Admin opens the app → sees the login screen</li>
+    <li>Enters email and password</li>
+    <li>Supabase Auth validates credentials → JWT token issued</li>
+    <li>App detects active session → queries <code>admins</code> table → determines role = Admin</li>
+    <li>Navigates to Admin Dashboard with full navigation</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-2: Admin Creates an Order</h4>
+  <ol>
+    <li>Admin navigates to Orders → taps "New Shipment"</li>
+    <li>Fills in: sender name/phone, pickup address, receiver name/phone, delivery address, city (dropdown), COD amount, weight</li>
+    <li>Taps "CREATE"</li>
+    <li>System generates ID (<code>SDS-{timestamp}</code>), inserts into <code>orders</code> table with status "processing"</li>
+    <li>Order appears instantly in the list via real-time streaming</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-3: Admin Assigns Orders to Riders</h4>
+  <ol>
+    <li>Admin selects multiple orders via checkboxes → floating batch action bar appears</li>
+    <li><strong>Auto Assign:</strong> System finds all "available" riders, distributes orders via round-robin (even distribution)</li>
+    <li><strong>Manual Assign:</strong> Admin picks a specific rider from a dialog showing name, phone, and status</li>
+    <li>Order status updates to "assigned", <code>rider_id</code> is set</li>
+    <li>Assigned rider sees the order in their dashboard immediately (real-time)</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-4: Admin Registers a New Rider</h4>
+  <ol>
+    <li>Admin goes to "Onboard" screen</li>
+    <li>Fills in login credentials (email, password ≥ 6 chars) and official documents (name, phone, passport, emirates ID, address)</li>
+    <li>Taps "Register Rider"</li>
+    <li>System inserts row in <code>riders</code> table → creates Supabase Auth account</li>
+    <li>Green snackbar: "Rider registered successfully! They can now log in."</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-5: Admin Monitors Fleet</h4>
+  <ol>
+    <li>Admin navigates to "Fleet" screen</li>
+    <li>Sees all riders with real-time status, contact info, and documents</li>
+    <li>Can search by name or phone number</li>
+    <li>Can remove a rider from the system (with confirmation dialog)</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-6: Admin Verifies Parcel via QR</h4>
+  <ol>
+    <li>Admin navigates to "Verify" screen → camera opens</li>
+    <li>Points camera at parcel QR code</li>
+    <li>System scans → extracts order ID → updates status to "inTransit" + sets <code>verified = true</code></li>
+    <li>Green success dialog appears with order ID</li>
+    <li>Alternative: taps "Enter ID Manually" if camera scan fails</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-7: Admin Views Analytics</h4>
+  <ol>
+    <li>Admin taps "Generate Report" on the dashboard</li>
+    <li>Loading indicator while data is fetched</li>
+    <li>Bottom sheet modal shows: total orders, delivered count, cancelled count</li>
+    <li>Per-rider performance breakdown (number of deliveries completed by each rider)</li>
+  </ol>
+</div>
+
+<h3>13.2 Rider Use Cases</h3>
+
+<div class="uc-card">
+  <h4>UC-8: Rider Logs In</h4>
+  <ol>
+    <li>Rider opens the app → enters email + password (provided by admin at registration)</li>
+    <li>Supabase Auth validates → app checks <code>riders</code> table → determines role = Rider</li>
+    <li>Navigates to Rider Dashboard with limited navigation (no Fleet, Onboard, or Settings)</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-9: Rider Views Their Deliveries</h4>
+  <ol>
+    <li>Rider sees their personal dashboard with welcome message using their name</li>
+    <li>Stats cards show: total deliveries completed, total COD collected (AED)</li>
+    <li>Active deliveries list shows only orders assigned to them that aren't delivered yet</li>
+    <li>Each order card shows: order ID, receiver name, city, current status</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-10: Rider Toggles Duty Status</h4>
+  <ol>
+    <li>Rider taps "On Duty" / "Off Duty" toggle button in the header</li>
+    <li>System updates <code>riders.status</code> to "available" or "unavailable"</li>
+    <li>Admin sees the change in real-time on the Fleet Management screen</li>
+    <li>If set to "unavailable", the auto-assignment algorithm skips this rider</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-11: Rider Verifies Delivery via QR</h4>
+  <ol>
+    <li>Rider navigates to the QR scanner screen</li>
+    <li>Scans parcel QR code → system extracts order ID</li>
+    <li>Order status updates to "inTransit", <code>verified</code> set to <code>true</code></li>
+    <li>Confirms physical handover of the parcel</li>
+  </ol>
+</div>
+
+<div class="uc-card">
+  <h4>UC-12: Rider Signs Out</h4>
+  <ol>
+    <li>Rider taps the logout icon → confirmation dialog appears</li>
+    <li>Confirms → Supabase session destroyed → returns to login screen</li>
+  </ol>
+</div>
+
+<!-- ============================= SECTION 14 ============================= -->
+<div class="section-break"></div>
+<h2>14. Project File Structure</h2>
+
+<div class="file-tree">
+<span class="folder">lib/</span>
+├── <span class="file">main.dart</span>                              <span class="comment"># App entry point, auth guard, mobile simulator</span>
+├── <span class="folder">core/</span>
+│   ├── <span class="folder">config/</span>
+│   │   └── <span class="file">secrets.dart</span>                   <span class="comment"># Service role key (private)</span>
+│   ├── <span class="folder">models/</span>
+│   │   ├── <span class="file">log_model.dart</span>                 <span class="comment"># Log data model</span>
+│   │   ├── <span class="file">order_model.dart</span>               <span class="comment"># Order data model + OrderStatus enum</span>
+│   │   └── <span class="file">rider_model.dart</span>               <span class="comment"># Rider data model</span>
+│   ├── <span class="folder">services/</span>
+│   │   ├── <span class="file">auth_service.dart</span>              <span class="comment"># Login, logout, role detection</span>
+│   │   ├── <span class="file">log_service.dart</span>               <span class="comment"># Activity logging + streaming</span>
+│   │   ├── <span class="file">order_service.dart</span>             <span class="comment"># Order CRUD + assignment algorithms</span>
+│   │   ├── <span class="file">report_service.dart</span>            <span class="comment"># Analytics + system health metrics</span>
+│   │   ├── <span class="file">rider_service.dart</span>             <span class="comment"># Rider CRUD + auth account creation</span>
+│   │   └── <span class="file">supabase_service.dart</span>          <span class="comment"># Supabase connection configuration</span>
+│   ├── <span class="folder">theme/</span>
+│   │   └── <span class="file">app_theme.dart</span>                 <span class="comment"># Colors, fonts, spacing, Material theme</span>
+│   └── <span class="folder">widgets/</span>
+│       └── <span class="file">glass_card.dart</span>                <span class="comment"># Reusable card component</span>
+└── <span class="folder">features/</span>
+    ├── <span class="folder">auth/</span>
+    │   ├── <span class="file">auth_screen.dart</span>               <span class="comment"># Placeholder auth screen</span>
+    │   └── <span class="file">login_screen.dart</span>              <span class="comment"># Email/password login UI</span>
+    ├── <span class="folder">dashboard/</span>
+    │   ├── <span class="file">dashboard_screen.dart</span>          <span class="comment"># Admin dashboard (KPIs, health, reports)</span>
+    │   └── <span class="file">rider_dashboard_screen.dart</span>    <span class="comment"># Rider dashboard (my orders, stats)</span>
+    ├── <span class="folder">navigation/</span>
+    │   └── <span class="file">main_navigation_screen.dart</span>    <span class="comment"># App shell, nav bar/rail, role routing</span>
+    ├── <span class="folder">orders/</span>
+    │   └── <span class="file">orders_screen.dart</span>             <span class="comment"># Order list, create, assign</span>
+    ├── <span class="folder">profile/</span>
+    │   └── <span class="file">profile_screen.dart</span>            <span class="comment"># Admin settings &amp; logout</span>
+    ├── <span class="folder">qr_scanner/</span>
+    │   └── <span class="file">qr_scanner_screen.dart</span>         <span class="comment"># QR scanning &amp; manual entry</span>
+    ├── <span class="folder">rider_management/</span>
+    │   └── <span class="file">rider_management_screen.dart</span>   <span class="comment"># Fleet list (cards/table), search, delete</span>
+    └── <span class="folder">rider_registration/</span>
+        └── <span class="file">rider_registration_screen.dart</span> <span class="comment"># New rider form + auth account creation</span>
+</div>
+
+<!-- ============================= SECTION 15 ============================= -->
+<h2>15. Deployment</h2>
+
+<h3>15.1 Supported Platforms</h3>
+<table>
+  <tr><th>Platform</th><th>Build System</th><th>Output</th></tr>
+  <tr><td>Android</td><td>Gradle (Kotlin DSL)</td><td>APK / AAB</td></tr>
+  <tr><td>iOS</td><td>Xcode</td><td>IPA</td></tr>
+  <tr><td>Web</td><td>Dart-to-JS compiler</td><td>Static HTML/JS/CSS</td></tr>
+  <tr><td>Windows</td><td>CMake</td><td>EXE</td></tr>
+  <tr><td>macOS</td><td>Xcode</td><td>.app bundle</td></tr>
+  <tr><td>Linux</td><td>CMake</td><td>Binary</td></tr>
+</table>
+
+<h3>15.2 Build Commands</h3>
+<pre><code>flutter pub get              # Install all dependencies
+flutter run -d chrome        # Run on web (Chrome)
+flutter run                  # Run on connected mobile device
+flutter build apk            # Build Android APK
+flutter build web            # Build static web files for deployment
+flutter build windows        # Build Windows desktop EXE</code></pre>
+
+<h3>15.3 Web Simulator</h3>
+<p>On the web version, a floating action button allows toggling a <strong>Pixel 6 Pro simulator</strong> — rendering the app inside a phone-shaped container (450×850px with rounded corners and a dark bezel) for mobile UI testing without a physical device.</p>
+
+<!-- ============================= SECTION 16 ============================= -->
+<div class="section-break"></div>
+<h2>16. Conclusion</h2>
+<p>Seven Delivery Service demonstrates a complete, production-ready delivery management system built with Flutter and Supabase. The project showcases:</p>
+<ul>
+  <li><strong>Real-time data streaming</strong> — using Supabase Realtime WebSocket subscriptions for instant cross-device updates</li>
+  <li><strong>Role-based access control</strong> — two distinct user experiences (admin and rider) from a single codebase</li>
+  <li><strong>Cross-platform deployment</strong> — one Dart codebase compiling to Android, iOS, web, and desktop</li>
+  <li><strong>Responsive design</strong> — adaptive layouts from mobile (bottom nav) to desktop (side rail with DataTables)</li>
+  <li><strong>QR-based verification</strong> — physical parcel handover confirmation using camera scanning</li>
+  <li><strong>Smart assignment algorithms</strong> — load-balanced rider distribution for order assignment</li>
+  <li><strong>Material Design 3</strong> — cohesive design system with consistent theming, spacing, and typography</li>
+  <li><strong>Cloud-native architecture</strong> — serverless backend with Supabase handling database, auth, and realtime</li>
+</ul>
+
+<div class="page-footer">
+  Seven Delivery Service · Flutter &amp; Supabase · April 2026
+</div>
+
+</body>
+</html>

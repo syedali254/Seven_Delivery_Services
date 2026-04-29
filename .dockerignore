@@ -1,0 +1,14 @@
+# Ignore everything except the build folder
+**
+!build/web/
+.git
+.dart_tool
+.idea
+.vscode
+ios
+android
+windows
+linux
+macos
+test
+*.md
